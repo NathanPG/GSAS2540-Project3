@@ -118,18 +118,17 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //win
         if ((info.time <= 0 || info.life == 0) && isGameStart)
         {
             SceneManager.LoadScene("EndScene");
             EndMenu.SetActive(true);
-            if (info.time <= 0)
+            if(info.life == 0)
+            {
+                fmsgobject.SetActive(true);
+            }
+            else
             {
                 wmsgobject.SetActive(true);
-            }
-            else if(info.life == 0)
-            {
-                fmsgobject.SetActive(true); 
             }
             info.UpdateScore(info.score);
             info.DisplayScore();
@@ -143,7 +142,7 @@ public class SceneController : MonoBehaviour
         //first start
         else if (isFirstScene)
         {
-            info.time = 10;
+            info.time = 60;
             smsgobject.SetActive(true);
             if (Input.GetMouseButton(0))
             {
