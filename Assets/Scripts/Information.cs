@@ -46,8 +46,7 @@ public class Information : MonoBehaviour
         addscore();
         updatescore();
     }
-    public void timer() { 
-}
+
     //Update the life text object
     public void updatelife()
     {
@@ -111,6 +110,10 @@ public class Information : MonoBehaviour
         if (time >= 0)
         {
             time -= Time.deltaTime;
+        }
+        else
+        {
+            time = 0;
         }
         if (scene.isGameStart)
         {

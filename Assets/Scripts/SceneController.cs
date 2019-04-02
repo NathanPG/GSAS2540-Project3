@@ -119,11 +119,11 @@ public class SceneController : MonoBehaviour
     void Update()
     {
         //win
-        if ((info.time == 0 || info.life == 0) && isGameStart)
+        if ((info.time <= 0 || info.life == 0) && isGameStart)
         {
             SceneManager.LoadScene("EndScene");
             EndMenu.SetActive(true);
-            if (info.time == 0)
+            if (info.time <= 0)
             {
                 wmsgobject.SetActive(true);
             }
@@ -143,7 +143,7 @@ public class SceneController : MonoBehaviour
         //first start
         else if (isFirstScene)
         {
-            info.time = 60;
+            info.time = 10;
             smsgobject.SetActive(true);
             if (Input.GetMouseButton(0))
             {
