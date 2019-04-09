@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour
+public class SmallAsteroid : MonoBehaviour
 {
     public AudioSource DestroySound;
     public Information info;
@@ -28,8 +28,6 @@ public class Asteroid : MonoBehaviour
                 DestroySound.Play();
             }
             Instantiate(explosionPre, transform.position, Quaternion.identity);
-            info.addscore();
-            info.updatescore();
             info.loselife();
             info.updatelife();
             info.respawning = true;

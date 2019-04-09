@@ -19,6 +19,8 @@ TagManager:
   - Projectile
   - fire
   - destroy
+  - SmallAsteroid
+  - HugeAsteroid
   layers:
   - Default
   - TransparentFX

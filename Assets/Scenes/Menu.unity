@@ -147,8 +147,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -834.6, y: -472.3}
-  m_SizeDelta: {x: 208.8, y: 112.5}
+  m_AnchoredPosition: {x: -779.1, y: -451.6}
+  m_SizeDelta: {x: 319.8, y: 153.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5320505
 MonoBehaviour:
@@ -199,7 +199,9 @@ MonoBehaviour:
 
     W to move.
 
-    Space to fire'
+    Space to fire
+
+    1 or 2 switch weapon.'
 --- !u!222 &5320507
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -262,7 +264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &31704280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1276,8 +1278,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.5, y: 470.7}
-  m_SizeDelta: {x: 355.1, y: 121.5}
+  m_AnchoredPosition: {x: -733.9, y: 495.2}
+  m_SizeDelta: {x: 360.3, y: 72.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &300499973
 GameObject:
@@ -4637,7 +4639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1667898969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5278,7 +5280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2020951936
 RectTransform:
   m_ObjectHideFlags: 0

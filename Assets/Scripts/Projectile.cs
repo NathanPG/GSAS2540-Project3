@@ -18,7 +18,8 @@ public class Projectile : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Asteroid")
+        if (collision.gameObject.tag == "SmallAsteroid" 
+            || collision.gameObject.tag == "HugeAsteroid")
         {
             Destroy(this.gameObject);
         }

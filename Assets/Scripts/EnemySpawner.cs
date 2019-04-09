@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public List<Sprite> spritelist = new List<Sprite>();
+    
     public SceneController scene;
-    public float AsteroidSpeed;
-    private float cdirection;
-    public bool spawnstart = false;
-    public int SpritetoUse;
     public Information info;
     public GameObject prefab;
-    
     public GameObject AsteroidContainer;
+    public GameObject SmallAsteroid;
+    public GameObject HugeAsteroid;
+    public List<Sprite> spritelist = new List<Sprite>();
 
-    private void InsAsteroid()
+    public bool spawnstart = false;
+    private void SpawnSmall()
     {
-        var NewAsteroid = new GameObject();
-        NewAsteroid.tag = "Asteroid";
-        var SpriteRenderer = NewAsteroid.AddComponent<SpriteRenderer>();
-        SpritetoUse = Random.Range(0, 7);
-        SpriteRenderer.sprite = spritelist[SpritetoUse];
-        var AsteroidCollider = NewAsteroid.AddComponent<BoxCollider2D>();
-        AsteroidCollider.isTrigger = true;
         Vector3 pos;
         Vector3 direction;
+        int SpritetoUse = Random.Range(0, 3);
+        float EnemySpeed = 200f;
+        SmallAsteroid = new GameObject();
+        SmallAsteroid.name = "SmallAsteroid";
+        SmallAsteroid.tag = "SmallAsteroid";
+
+        var SpriteRenderer = SmallAsteroid.AddComponent<SpriteRenderer>();
+        SpriteRenderer.sprite = spritelist[SpritetoUse];
+
+        var AsteroidCollider = SmallAsteroid.AddComponent<BoxCollider2D>();
+        AsteroidCollider.isTrigger = true;
+
+
         int SpawnSide = Random.Range(0, 4);
         //top
         if (SpawnSide == 0)
@@ -51,27 +56,89 @@ public class EnemySpawner : MonoBehaviour
             pos = new Vector3(Screen.width, Random.Range(0f, Screen.height), -1f);
             direction = new Vector3(-1, Random.Range(-1f, 1f),0);
         }
-        NewAsteroid.transform.position = pos;
-        NewAsteroid.transform.SetParent(AsteroidContainer.transform);
-        var ascript = NewAsteroid.AddComponent<Asteroid>();
+        SmallAsteroid.transform.position = pos;
+
+        SmallAsteroid.transform.SetParent(AsteroidContainer.transform);
+
+        var ascript = SmallAsteroid.AddComponent<SmallAsteroid>();
         ascript.explosionPre = prefab;
-        var rb = NewAsteroid.AddComponent<Rigidbody2D>();
+
+        var rb = SmallAsteroid.AddComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        rb.velocity = AsteroidSpeed * direction;
+        rb.velocity = EnemySpeed * direction;
     }
-   
+
+    private void SpawnHuge()
+    {
+        Vector3 pos;
+        Vector3 direction;
+        int SpritetoUse = Random.Range(4, 6);
+        float EnemySpeed = 150f;
+        HugeAsteroid = new GameObject();
+        HugeAsteroid.name = "HugeAsteroid";
+        HugeAsteroid.tag = "HugeAsteroid";
+
+        var SpriteRenderer = HugeAsteroid.AddComponent<SpriteRenderer>();
+        SpriteRenderer.sprite = spritelist[SpritetoUse];
+
+        var AsteroidCollider = HugeAsteroid.AddComponent<BoxCollider2D>();
+        AsteroidCollider.isTrigger = true;
+        
+        int SpawnSide = Random.Range(0, 4);
+        //top
+        if (SpawnSide == 0)
+        {
+            pos = new Vector3(Random.Range(0f, Screen.width), Screen.height, -1f);
+            direction = new Vector3(Random.Range(-1f, 1f), -1, 0);
+        }
+        //bottom
+        else if (SpawnSide == 1)
+        {
+            pos = new Vector3(Random.Range(0f, Screen.width), 0f, -1f);
+            direction = new Vector3(Random.Range(-1f, 1f), 1, 0);
+        }
+        //left
+        else if (SpawnSide == 2)
+        {
+            pos = new Vector3(0f, Random.Range(0f, Screen.height), -1f);
+            direction = new Vector3(1, Random.Range(-1f, 1f), 0);
+        }
+        //right
+        else
+        {
+            pos = new Vector3(Screen.width, Random.Range(0f, Screen.height), -1f);
+            direction = new Vector3(-1, Random.Range(-1f, 1f), 0);
+        }
+
+
+        HugeAsteroid.transform.position = pos;
+
+        HugeAsteroid.transform.SetParent(AsteroidContainer.transform);
+
+
+        var ascript = HugeAsteroid.AddComponent<HugeAsteroid>();
+        ascript.explosionPre = prefab;
+        ascript.spritelist = spritelist;
+
+        var rb = HugeAsteroid.AddComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        rb.velocity = EnemySpeed * direction;
+    }
+
     public void Awake()
     {
         info = GameObject.FindGameObjectWithTag("UI").GetComponent<Information>();
         scene = GameObject.FindGameObjectWithTag("UI").GetComponent<SceneController>();
         AsteroidContainer = new GameObject();
+        AsteroidContainer.name = "AsteroidContainer";
     }
 
     IEnumerator RestartSpawning()
     {
         yield return new WaitForSeconds(3.0f);
         info.clearscreen = false;
-        InvokeRepeating("InsAsteroid", 0.5f, 0.5f);
+        InvokeRepeating("SpawnSmall", 1f, 1f);
+        InvokeRepeating("SpawnHuge", 3f, 3f);
     }
 
     void Update()
@@ -80,7 +147,8 @@ public class EnemySpawner : MonoBehaviour
         {
             if (!spawnstart)
             {
-                InvokeRepeating("InsAsteroid", 0.5f, 0.5f);
+                InvokeRepeating("SpawnSmall", 1f, 1f);
+                InvokeRepeating("SpawnHuge", 3f, 3f);
                 spawnstart = true;
             }
             else
