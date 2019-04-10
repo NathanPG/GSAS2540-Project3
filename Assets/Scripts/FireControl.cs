@@ -75,15 +75,17 @@ public class FireControl : MonoBehaviour
         Laser3.transform.position = pos;
         Laser3.transform.SetParent(ProjectileContainer.transform);
         
-        var r = Quaternion.Euler(ship.transform.rotation.x, ship.transform.rotation.y, -ship.transform.rotation.z);
+        var r = Quaternion.Euler(0, 0, ship.transform.rotation.z);
         Laser1.transform.rotation = r;
         Laser1.AddComponent<Projectile>();
         var rb = Laser1.AddComponent<Rigidbody2D>();
         rb.isKinematic = true;
         direction = Laser1.transform.up;
+        Debug.Log(ship.transform.forward);
+        Debug.Log(ship.transform.up);
         rb.velocity = ProjectileSpeed * direction;
 
-        var r2 = Quaternion.Euler(ship.transform.rotation.x, ship.transform.rotation.y, -ship.transform.rotation.z-30f);
+        var r2 = Quaternion.Euler(0, 0, ship.transform.rotation.z-30f);
         Laser2.transform.rotation = r2;
         Laser2.AddComponent<Projectile>();
         var rb2 = Laser2.AddComponent<Rigidbody2D>();
@@ -91,7 +93,7 @@ public class FireControl : MonoBehaviour
         direction = Laser2.transform.up;
         rb2.velocity = ProjectileSpeed * direction;
 
-        var r3 = Quaternion.Euler(ship.transform.rotation.x, ship.transform.rotation.y, -ship.transform.rotation.z+30f);
+        var r3 = Quaternion.Euler(0, 0, ship.transform.rotation.z+30f);
         Laser3.transform.rotation = r3;
         Laser3.AddComponent<Projectile>();
         var rb3 = Laser3.AddComponent<Rigidbody2D>();
