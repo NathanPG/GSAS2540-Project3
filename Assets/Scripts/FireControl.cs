@@ -14,6 +14,7 @@ public class FireControl : MonoBehaviour
     public GameObject ship;
     public GameObject ProjectileContainer;
     public AudioSource firesound;
+    public GameObject laserpre;
     public Text weaponname;
     public float coolTime;
     public int weaponnum;
@@ -26,7 +27,6 @@ public class FireControl : MonoBehaviour
         var NewProjectile = new GameObject();
         NewProjectile.tag = "Projectile";
         var SpriteRenderer = NewProjectile.AddComponent<SpriteRenderer>();
-        //SpritetoUse = Random.Range(0, 7);
         SpriteRenderer.sprite = plasma;
         NewProjectile.transform.localScale = new Vector3(200, 200, 1);
         var ProjectileCollider = NewProjectile.AddComponent<BoxCollider2D>();
@@ -46,60 +46,44 @@ public class FireControl : MonoBehaviour
     private void FireLaser()
     {
         float ProjectileSpeed = 300f;
-        var Laser1 = new GameObject();
-        var Laser2 = new GameObject();
-        var Laser3 = new GameObject();
-        Laser1.tag = "Projectile";
-        Laser2.tag = "Projectile";
-        Laser3.tag = "Projectile";
-        var SpriteRenderer = Laser1.AddComponent<SpriteRenderer>();
-        SpriteRenderer.sprite = laser;
-        SpriteRenderer = Laser2.AddComponent<SpriteRenderer>();
-        SpriteRenderer.sprite = laser;
-        SpriteRenderer = Laser3.AddComponent<SpriteRenderer>();
-        SpriteRenderer.sprite = laser;
 
-
-        //NewProjectile.transform.localScale = new Vector3(200, 200, 1);
-        var ProjectileCollider = Laser1.AddComponent<BoxCollider2D>();
-        ProjectileCollider.isTrigger = true;
-        ProjectileCollider = Laser2.AddComponent<BoxCollider2D>();
-        ProjectileCollider.isTrigger = true;
-        ProjectileCollider = Laser3.AddComponent<BoxCollider2D>();
-        ProjectileCollider.isTrigger = true;
-        pos.z = -10;
-        Laser1.transform.position = pos;
-        Laser1.transform.SetParent(ProjectileContainer.transform);
-        Laser2.transform.position = pos;
-        Laser2.transform.SetParent(ProjectileContainer.transform);
-        Laser3.transform.position = pos;
-        Laser3.transform.SetParent(ProjectileContainer.transform);
-        
         var r = Quaternion.Euler(0, 0, ship.transform.rotation.z);
-        Laser1.transform.rotation = r;
-        Laser1.AddComponent<Projectile>();
-        var rb = Laser1.AddComponent<Rigidbody2D>();
-        rb.isKinematic = true;
-        direction = Laser1.transform.up;
-        Debug.Log(ship.transform.forward);
-        Debug.Log(ship.transform.up);
-        rb.velocity = ProjectileSpeed * direction;
+        var b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
 
-        var r2 = Quaternion.Euler(0, 0, ship.transform.rotation.z-30f);
-        Laser2.transform.rotation = r2;
-        Laser2.AddComponent<Projectile>();
-        var rb2 = Laser2.AddComponent<Rigidbody2D>();
-        rb2.isKinematic = true;
-        direction = Laser2.transform.up;
-        rb2.velocity = ProjectileSpeed * direction;
 
-        var r3 = Quaternion.Euler(0, 0, ship.transform.rotation.z+30f);
-        Laser3.transform.rotation = r3;
-        Laser3.AddComponent<Projectile>();
-        var rb3 = Laser3.AddComponent<Rigidbody2D>();
-        rb3.isKinematic = true;
-        direction = Laser3.transform.up;
-        rb3.velocity = ProjectileSpeed * direction;
+
+        r = Quaternion.Euler(0, 0, ship.transform.rotation.z + 45f);
+        b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
+
+
+        r = Quaternion.Euler(0, 0, ship.transform.rotation.z - 45f);
+        b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
+
+        r = Quaternion.Euler(0, 0, ship.transform.rotation.z + 90f);
+        b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
+
+        r = Quaternion.Euler(0, 0, ship.transform.rotation.z - 90f);
+        b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
+
+        r = Quaternion.Euler(0, 0, ship.transform.rotation.z - 135f);
+        b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
+
+        r = Quaternion.Euler(0, 0, ship.transform.rotation.z + 135f);
+        b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
+
+        r = Quaternion.Euler(0, 0, ship.transform.rotation.z - 180f);
+        b = Instantiate(laserpre, ship.transform.position, r);
+        b.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * b.transform.up;
+
+
+
     }
 
     public void Awake()
@@ -143,7 +127,7 @@ public class FireControl : MonoBehaviour
             }else if(weaponnum == 2)
             {
                 FireLaser();
-                coolTime = 2f;
+                coolTime = 5f;
             }
         }
     } 

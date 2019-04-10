@@ -281,6 +281,8 @@ MonoBehaviour:
   ship: {fileID: 0}
   ProjectileContainer: {fileID: 0}
   firesound: {fileID: 0}
+  laserpre: {fileID: 1718069491637780333, guid: d8bd734dc0ea39a43b5a53411afc67c7,
+    type: 3}
   weaponname: {fileID: 1708427746}
   coolTime: 0.5
   weaponnum: 0
